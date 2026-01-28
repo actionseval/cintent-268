@@ -25,14 +25,14 @@ jobs:
       - name: Clone repo
         uses: actions/checkout@v5.0.0
 
-      # CINTENT >> INSERT_CINTENT
-      - uses: JavidDitty/setup-cintent@a606c80c34ec190c6a20dea33d6d58ddb6c4e0cc
-
       - name: Set up python
         id: setup-python
         uses: actions/setup-python@v6.0.0
         with:
           python-version: '3.13'
+      
+      # CINTENT >> INSERT_CINTENT
+      - uses: JavidDitty/setup-cintent@3e5b2faf83a2ad32c22a1cd0f86f5f20ea53a5ab
 
       # CINTENT >> REMOVE_CACHE
       # - name: Cache dependencies
@@ -43,7 +43,7 @@ jobs:
       #     key: ${{ runner.os }}-${{ runner.arch }}-Python-${{ steps.setup-python.outputs.python-version }}-${{ hashFiles('requirements/required.txt', 'requirements/docs.txt', 'requirements/tests.txt') }}-tutorials
       
       - name: Install pip dependencies
-        if: steps.cache.outputs.cache-hit != 'true'
+        # if: steps.cache.outputs.cache-hit != 'true'
         run: |
           pip install -r requirements/required.txt -r requirements/docs.txt -r requirements/tests.txt planetary_computer pystac tensorboard h5py scikit-learn .
           pip cache purge
